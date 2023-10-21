@@ -12,7 +12,7 @@ export interface IListeners {
     adShowError: [error: Error];
     adShowStart: [];
     adShowClick: [];
-    adShown: [];
+    adShown: [state: { state: "SKIPPED" | "COMPLETED" }];
 }
 
 interface IUnityAdsPlugin extends Plugin {

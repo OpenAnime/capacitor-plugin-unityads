@@ -2,6 +2,12 @@
 
 Unity ADS Integration for Capacitor & Ionic Projects.
 
+## ⚠ NOTE
+
+This plugin is in beta. Currently it only supports interstitial ads but rewarded ads and banner ads are planned.
+
+Also, IOS support is still under development.
+
 ## Install
 
 ```bash
@@ -12,6 +18,7 @@ npx cap sync
 ## Table of Contents
 
 - [capacitor-plugin-unityads](#capacitor-plugin-unityads)
+  - [⚠ NOTE](#-note)
   - [Install](#install)
   - [Table of Contents](#table-of-contents)
   - [Basic Example with Svelte](#basic-example-with-svelte)
@@ -30,6 +37,7 @@ npx cap sync
 
   let ready = false;
   let message = "";
+  let isSkipped;
 
   const unityGameId = "YOUR_GAME_ID";
   const testMode = true; //change this to false in production!
@@ -47,8 +55,8 @@ npx cap sync
       message = "initializationError: " + error;
     });
 
-    UnityAds.addListener("adShown", () => {
-      message = "ad shown";
+    UnityAds.addListener("adShown", ({ state }) => {
+      message = "ad completed state: " + state; // SKIPPED or COMPLETED
       UnityAds.loadAds({
         adUnitId,
       });
@@ -127,7 +135,7 @@ displayAd() => void
 | `adLoaded`            | `null`               | Fires when AD is loaded.                     |
 | `adShowStart`         | `null`               | Fires when AD starts showing.                |
 | `adShowClick`         | `null`               | Fires when user clicks the AD.               |
-| `adShown`             | `null`               | Fires when AD is completed.                  |
+| `adShown`             | `{ state: "SKIPPED" \| "COMPLETED"; }` | Fires when AD is completed or skipped.                  |
 | `initializationError` | `{ error: string; }` | Fires when error occurs in initialization.   |
 | `adLoadError`         | `{ error: string; }` | Fires when error occurs while loading an AD. |
 | `adShowError`         | `{ error: string; }` | Fires when error occurs while showing an AD. |
