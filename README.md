@@ -11,7 +11,7 @@ Also, IOS support is still under development.
 ## Install
 
 ```bash
-npm install capacitor-plugin-unityads
+npm install @openanime/capacitor-plugin-unityads
 npx cap sync
 ```
 
