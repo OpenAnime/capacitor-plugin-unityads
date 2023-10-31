@@ -33,7 +33,7 @@ npx cap sync
 ```html
 <script>
   import { onMount } from "svelte";
-  import { UnityAds } from "unity-ads-capacitor";
+  import { UnityAds } from "@openanime/unity-ads-capacitor";
 
   let ready = false;
   let message = "";
